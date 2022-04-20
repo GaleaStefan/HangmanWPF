@@ -1,0 +1,90 @@
+<UserControl x:Class="Hangman.Views.UserSelectorControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Hangman"
+             xmlns:viewModels="clr-namespace:Hangman.ViewModels"
+             xmlns:model="clr-namespace:Hangman.Model"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance viewModels:UserSelectorViewModel}">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2" 
+                   HorizontalAlignment="Center"
+                   FontWeight="Heavy"
+                   FontFamily="Arial"
+                   FontSize="20"
+                   Margin="5"
+                   Text="Welcome to Hangman! Please sign in"/>
+        
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1"
+                    Orientation="Vertical">
+            <TextBlock FontWeight="Bold"
+                       FontFamily="Arial"
+                       FontSize="14"
+                       Text="Choose user:"/>
+            <ListView 
+                ItemsSource="{Binding AllUsers}"
+                SelectedItem="{Binding SelectedUser, Mode=OneWayToSource}">
+                <ListView.ItemTemplate>
+                    <DataTemplate DataType="{x:Type model:User}">
+                        <TextBlock Text="{Binding Name}" 
+                                   FontSize="15"
+                                   HorizontalAlignment="Center"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="1" Orientation="Vertical">
+            <Image Source="{Binding SelectedUser.ImageName}" 
+                   Width="64" 
+                   Height="64"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"/>
+        </StackPanel>
+        <StackPanel Grid.Column="0"
+                    Grid.ColumnSpan="2" 
+                    Grid.Row="2" 
+                    Orientation="Vertical"
+                    HorizontalAlignment="Center">
+            <Button Content="New User"
+                    FontSize="15"
+                    FontWeight="Heavy"
+                    FontFamily="Arial"
+                    Margin="0,5"
+                    Padding="20, 3"
+                    Command="{Binding NewUserCommand}"/>
+            <Button Content="Delete User"
+                    FontSize="15"
+                    FontWeight="Heavy"
+                    FontFamily="Arial"
+                    Margin="0,5"
+                    Padding="20, 3"
+                    Command="{Binding DeleteUserCommand}"/>
+            
+            <Button Content="Play"
+                    FontSize="15"
+                    FontWeight="Heavy"
+                    FontFamily="Arial"
+                    Margin="0,5"
+                    Padding="20, 3"
+                    Command="{Binding UserChosenCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

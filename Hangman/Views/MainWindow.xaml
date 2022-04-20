@@ -1,0 +1,30 @@
+﻿<Window x:Class="Hangman.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Hangman"
+        xmlns:viewModels="clr-namespace:Hangman.ViewModels"
+        xmlns:views="clr-namespace:Hangman.Views"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        mc:Ignorable="d"
+        Title="Hangman Game"
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+        Style="{DynamicResource CustomWindowStyle}"
+        SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:HangmanGameViewModel}">
+            <views:HangmanGameControl DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:UserSelectorViewModel}">
+            <views:UserSelectorControl DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:GameStartViewModel}">
+            <views:GameStartControl DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:StatisticsViewModel}">
+            <views:StatisticsUserControl DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
+    <ContentControl Content="{Binding CurrentViewModel}"/>
+</Window>
