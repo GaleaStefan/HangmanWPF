@@ -28,7 +28,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Button Margin="0,5" Click="ButtonBase_OnClick" 
-                Content="Select category" 
+                Content="Open SaveFile" 
                 IsEnabled="{Binding HasFileSelected}"/>
     </StackPanel>
 </Window>

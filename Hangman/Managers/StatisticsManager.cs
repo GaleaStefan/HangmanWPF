@@ -16,9 +16,9 @@ namespace Hangman.Managers
 
     public class StatisticsManager : IStatisticsManager
     {
-        private const string StatisticsFileExtension = ".stats";
+        public const string StatisticsFileExtension = ".stats";
         private const string StatisticsPath = @"\Statistics\";
-        private static readonly string StatisticsAbsolutePath;
+        public static readonly string StatisticsAbsolutePath;
         
         static StatisticsManager()
         {

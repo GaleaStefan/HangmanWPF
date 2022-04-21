@@ -18,7 +18,7 @@ namespace Hangman.Managers
     {
         private const string SaveFileExtension = ".savefile";
         private const string SaveFilePath = @"\Saves\";
-        private static readonly string SaveFileAbsolutePath;
+        public static readonly string SaveFileAbsolutePath;
         
         static GameSaveFilesManager()
         {

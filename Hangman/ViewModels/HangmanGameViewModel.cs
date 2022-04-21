@@ -57,7 +57,10 @@ namespace Hangman.ViewModels
             HangmanGame.GameEndEvent += OnGameEnd;
             HangmanGame.StartGame();
 
-            Keyboard = new KeyboardViewModel();
+            Keyboard = new KeyboardViewModel
+            {
+                UsedKeys = HangmanGame.CurrentLevel.Guesses
+            };
             Keyboard.KeyPressedEvent += c => HangmanGame.CurrentLevel.Guess(c);
 
             SaveGameCommand = new RelayCommand(SaveGame);

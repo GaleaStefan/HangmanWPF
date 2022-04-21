@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -57,8 +58,34 @@ namespace Hangman.Managers
 
         public void DeleteUser(User user)
         {
-            File.Delete(UsersAbsolutePath + user.Name + IUserXmlSerializer.FileExtension);
-            File.Delete(user.ImageName);
+            DeleteFileSafe(UsersAbsolutePath + user.Name + IUserXmlSerializer.FileExtension);
+            DeleteFileSafe(user.ImageName);
+            DeleteFileSafe(StatisticsManager.StatisticsAbsolutePath + user + StatisticsManager.StatisticsFileExtension);
+            DeleteDirectorySafe(GameSaveFilesManager.SaveFileAbsolutePath + user.Name + '\\');
+        }
+
+        private void DeleteDirectorySafe(string dir)
+        {
+            try
+            {
+                Directory.Delete(dir, true);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+
+        private void DeleteFileSafe(string path)
+        {
+            try
+            {
+                File.Delete(path);
+            }
+            catch (Exception)
+            {
+                return;
+            }
         }
 
         public IEnumerable<User> GetAllUsers() 
